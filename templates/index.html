@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>WTF Board</title>
+
+  <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+  <style>
+  .tile-area {
+    border: 1px;
+    width: 100%;
+  }
+    .draggable {
+    }
+
+    .session {
+      text-align: center;
+      vertical-align: middle;
+      background: #5757EF;
+      color: white;
+    }
+
+    .tile {
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+      width: 100px;
+      height: 100px;
+      display: table;
+      overflow: hidden;
+      margin: 5px;
+    }
+    .tile-inner {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $(".draggable").draggable();
+      $("#new-session-submit").click(function(e) {
+          var s = $("#session-view").append( '<div class="draggable tile session" />' );
+          var s0 = s[0];
+          s0.dataset.sessionTitle =  "Is there a future in being a LAMPer?";
+          s0.dataset.sessionConvener =  "Chris Phelps";
+          s0.dataset.sessionSpace = "Piano";
+          s0.dataset.sessionId = '';
+          s0.dataset.sessionDescription = '';
+          s0.dataset.sessionTime = '';
+          $(s0).prepend("<div class='tile-inner'><p class='session-title'>" + s0.dataset.sessionTitle + "</p></div>")
+      });
+
+    });
+    </script>
+</head>
+<body>
+
+<template id="canned-json">
+</template>
+
+<div class="modal fade" id="new-session-modal" tabindex="-1" role="dialog" aria-labelledby="new-session-label" aria-hidden="true">
+   <div class = "modal-dialog">
+      <div class = "modal-content">
+         <div class = "modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class = "modal-title" id = "new-session-label">New Session</h4>
+         </div>
+         <div class = "modal-body">
+           <form role="form">
+               <div class="form-group">
+                 <label for="session-title">Title</label>
+                   <input type="text" class="form-control" id="session-title" placeholder="Enter session title"/>
+               </div>
+               <div class="form-group">
+                 <label >Description</label>
+                   <textarea class="form-control" id="session-description" placeholder="abstract of your session here"></textarea>
+               </div>
+               <button id="new-session-submit" type="submit" class="btn btn-default" data-dismiss="modal">Save</button>
+             </form>
+         </div>
+         <div class = "modal-footer">
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+  <div class="container-fluid">
+  <div class="page-header" >
+    <h1>WTF Board</h1>
+</div>
+  <div class="collapse navbar-collapse" >
+      <ul class="nav navbar-nav">
+        <li class="active"><button id="btn-new-session" type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-session-modal">Add Session</button></li>
+      </ul>
+</div>
+<div id="session-view" class="tile-area row">
+  <ol class="date-list list-unstyled">
+    <li class="date-row" data-date="2016-02-29">
+      <h4>2016-02-29</h4>
+      <ol class="time-slots list-unstyled">
+        <li class="time-row" data-time-slot="09:00">
+          <h4>09:00-10:00</h4>
+          <ul class="list-inline">
+    <li class="draggable tile session" data-session-id="1"
+    data-session-title="Java 8: Functional Enough to Stem the Flow?"
+    data-session-convener="bruce" data-session-space="Stained Glass">
+      <div class="tile-inner">
+      <p class="session-title">Java 8: Functional Enough to Stem the Flow? <span>Bruce</span></p>
+    </div>
+  </li>
+    <li id="session-2" class="draggable tile session" data-session-title="All Things AI" data-session-convener="Dianne" data-session-room="downstairs">
+      <div class="tile-inner">
+        <p class="session-title"> All Things AI </p>
+      </div>
+    </li>
+  </ul>
+</li> <!-- time-row -->
+</ol> <!-- time-slots -->
+
+<ol class="time-slots list-unstyled">
+  <li class="time-row" data-time-slot="10:30">
+    <h4>10:30-11:30</h4>
+    <ul class="list-inline">
+<li class="draggable tile session" data-session-id="1"
+data-session-title="The Next Step to Creating a Trust Organization "
+data-session-convener="bruce" data-session-space="Rumors">
+<div class="tile-inner">
+<p class="session-title">The Next Step to Creating a Trust Organization <span>Bruce</span></p>
+</div>
+</li>
+</ul>
+</li> <!-- time-row -->
+</ol> <!-- time-slots -->
+
+  </li> <!-- date-row -->
+<li class="date-row" data-date="2016-03-01">
+  <h4>2016-03-01</h4>
+  <ol class="time-slots list-unstyled">
+    <li class="time-row" data-time-slot="09:00-10:00">
+    </li>
+  </ol>
+</li>
+</ol>
+  </div>
+</body>
+</html>
