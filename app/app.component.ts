@@ -10,6 +10,7 @@ import {SessionService} from './session.service'
 <h1>Open Spaces Board</h1>
 </div>
 
+<!-- TODO: refactor this to another module -->
 <div class="modal fade" id="new-session-modal" tabindex="-1" role="dialog" aria-labelledby="new-session-label" aria-hidden="true">
    <div class = "modal-dialog">
       <div class = "modal-content">
@@ -107,5 +108,8 @@ export class AppComponent {
     this.getSessions();
   }
 
-  onSelect(session: Session) { console.log("onSelect"); this.selectedSession = session; };
+  onSelect(session: Session) {
+    console.log("onSelect");
+    this.selectedSession = session;
+  };
 }
