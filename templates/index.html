@@ -4,7 +4,7 @@
     <title>WTF Board</title>
 
   <link href="static/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.4/jquery.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <script src="static/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
@@ -41,6 +41,12 @@
     </style>
     <script type="text/javascript">
     $(document).ready(function(){
+      var Sessions = Backbone.Collection.extend({
+      url: 'http://localhost:5000/board/api/1.0/sessions',
+      parse: function(data) {
+        return data.books;
+      }
+    });
       $(".draggable").draggable();
       $("#new-session-submit").click(function(e) {
           var s = $("#session-view").append( '<div class="draggable tile session" />' );
@@ -51,7 +57,6 @@
           s0.dataset.sessionId = '';
           s0.dataset.sessionDescription = '';
           s0.dataset.sessionTime = '';
-          $(s0).prepend("<div class='tile-inner'><p class='session-title'>" + s0.dataset.sessionTitle + "</p></div>")
       });
 
     });
@@ -60,6 +65,15 @@
 <body>
 
 <template id="canned-json">
+</template>
+
+<template id="session-template">
+  <li class="draggable tile session" data-session-id="" data-session-title="" data-session-convener="" data-session-space="">
+    <div class="tile-inner">
+    <p class="session-title"> <span></span></p>
+  </div>
+</li>
+
 </template>
 
 <div class="modal fade" id="new-session-modal" tabindex="-1" role="dialog" aria-labelledby="new-session-label" aria-hidden="true">
